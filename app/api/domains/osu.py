@@ -153,6 +153,21 @@ OsuClientGameModes = Literal[
     "OsuMania",
 ]
 
+# Redirect from osu. to @
+
+@router.get("/")
+def redirect():
+    return RedirectResponse(f"https://{app.settings.DOMAIN}", status_code=301)
+
+@router.get("/u/{id}")
+def redirect(id):
+    return RedirectResponse(f"https://{app.settings.DOMAIN}/u/{id}", status_code=301)
+
+@router.get("/home/account/{slug}")
+def redirect(slug):
+    return RedirectResponse(f"https://{app.settings.DOMAIN}/home/account/{slug}", status_code=301)
+
+###
 
 @router.post("/web/osu-error.php")
 async def osuError(
